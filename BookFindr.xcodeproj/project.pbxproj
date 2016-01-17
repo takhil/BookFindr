@@ -15,6 +15,7 @@
 		2602DE971C4B55A1004A4E9C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2602DE951C4B55A1004A4E9C /* LaunchScreen.storyboard */; };
 		2602DEA01C4C4228004A4E9C /* AdvSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602DE9F1C4C4228004A4E9C /* AdvSearchViewController.m */; };
 		2602DEA31C4C43F2004A4E9C /* tabResTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602DEA21C4C43F2004A4E9C /* tabResTableViewController.m */; };
+		2602DEA91C4C596B004A4E9C /* bookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602DEA81C4C596B004A4E9C /* bookViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,8 @@
 		2602DE9F1C4C4228004A4E9C /* AdvSearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdvSearchViewController.m; sourceTree = "<group>"; };
 		2602DEA11C4C43F2004A4E9C /* tabResTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tabResTableViewController.h; sourceTree = "<group>"; };
 		2602DEA21C4C43F2004A4E9C /* tabResTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tabResTableViewController.m; sourceTree = "<group>"; };
+		2602DEA71C4C596B004A4E9C /* bookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bookViewController.h; sourceTree = "<group>"; };
+		2602DEA81C4C596B004A4E9C /* bookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bookViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,8 @@
 				2602DEA21C4C43F2004A4E9C /* tabResTableViewController.m */,
 				2602DE9E1C4C4228004A4E9C /* AdvSearchViewController.h */,
 				2602DE9F1C4C4228004A4E9C /* AdvSearchViewController.m */,
+				2602DEA71C4C596B004A4E9C /* bookViewController.h */,
+				2602DEA81C4C596B004A4E9C /* bookViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -187,6 +192,7 @@
 				2602DEA01C4C4228004A4E9C /* AdvSearchViewController.m in Sources */,
 				2602DEA31C4C43F2004A4E9C /* tabResTableViewController.m in Sources */,
 				2602DE8F1C4B55A1004A4E9C /* ViewController.m in Sources */,
+				2602DEA91C4C596B004A4E9C /* bookViewController.m in Sources */,
 				2602DE8C1C4B55A1004A4E9C /* AppDelegate.m in Sources */,
 				2602DE891C4B55A1004A4E9C /* main.m in Sources */,
 			);

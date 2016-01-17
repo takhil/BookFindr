@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="4rs-Fl-9FS">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -18,10 +18,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jZM-YZ-IXK">
-                                <rect key="frame" x="87" y="57" width="240" height="240"/>
+                                <rect key="frame" x="87" y="115" width="240" height="240"/>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Example: &quot;Sherlock Holmes&quot;" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hk4-fc-rnK">
-                                <rect key="frame" x="37" y="403" width="240" height="30"/>
+                                <rect key="frame" x="54" y="403" width="240" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -40,20 +40,26 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i6Y-G1-xE2">
-                                <rect key="frame" x="291" y="403" width="52" height="30"/>
+                                <rect key="frame" x="308" y="403" width="52" height="30"/>
                                 <state key="normal" title="Submit"/>
                                 <connections>
+                                    <action selector="buttonSubmit:" destination="BYZ-38-t0r" eventType="touchUpInside" id="jaJ-Zt-C8r"/>
                                     <segue destination="Rjh-xa-92s" kind="show" id="rlc-Tv-JaF"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ab2-BV-yyI"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="logoImageView" destination="jZM-YZ-IXK" id="co6-uq-bTx"/>
+                        <outlet property="searchText" destination="Hk4-fc-rnK" id="uZQ-9W-jej"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="380" y="303"/>
+            <point key="canvasLocation" x="1192" y="303"/>
         </scene>
         <!--Tab Res Table View Controller-->
         <scene sceneID="xkH-y0-vEh">
@@ -65,7 +71,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" rowHeight="150" id="GdZ-dW-Rnu">
-                                <rect key="frame" x="0.0" y="28" width="414" height="150"/>
+                                <rect key="frame" x="0.0" y="92" width="414" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GdZ-dW-Rnu" id="KfM-fy-Mx3">
                                     <rect key="frame" x="0.0" y="0.0" width="381" height="149.5"/>
@@ -100,6 +106,9 @@
                                         </imageView>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="VVM-3r-JME" kind="show" id="7wb-Tb-ba4"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -111,7 +120,55 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qOA-Mg-OPE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="913" y="-48"/>
+            <point key="canvasLocation" x="1725" y="-48"/>
+        </scene>
+        <!--Book View Controller-->
+        <scene sceneID="GYB-YF-HPB">
+            <objects>
+                <viewController id="VVM-3r-JME" customClass="bookViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lhF-QM-AUQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fni-x0-ii9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="jzS-5Q-GhL">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="whI-8N-apE">
+                                <rect key="frame" x="87" y="100" width="240" height="240"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Veh-On-TtF">
+                                <rect key="frame" x="87" y="364" width="240" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Author" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tug-n4-a0t">
+                                <rect key="frame" x="87" y="384" width="240" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Description" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cL-oa-Tpf">
+                                <rect key="frame" x="20" y="413" width="374" height="139"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="bookAuthor" destination="jzS-5Q-GhL" id="0WS-iN-rIG"/>
+                        <outlet property="bookDescription" destination="4cL-oa-Tpf" id="Fxj-mY-b7W"/>
+                        <outlet property="bookImageView" destination="whI-8N-apE" id="Xud-Ko-9dh"/>
+                        <outlet property="bookTitle" destination="Veh-On-TtF" id="ewG-LN-UxT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wiN-OV-J2s" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2320" y="-48"/>
         </scene>
         <!--Adv Search View Controller-->
         <scene sceneID="tfn-nW-8wM">
@@ -130,7 +187,26 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vkg-od-00u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="913" y="754"/>
+            <point key="canvasLocation" x="1725" y="754"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="3UF-l8-fSQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="4rs-Fl-9FS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="f0x-Rf-yl1">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="ng8-2y-2QN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="syO-k9-zAE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="638" y="303"/>
         </scene>
     </scenes>
 </document>

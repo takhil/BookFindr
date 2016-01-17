@@ -9,10 +9,14 @@
 #import "ViewController.h"
 
 @interface ViewController ()
+@property (weak, nonatomic) IBOutlet UIImageView *logoImageView;
+@property (weak, nonatomic) IBOutlet UITextField *searchText;
 
 @end
 
 @implementation ViewController
+- (IBAction)buttonSubmit:(id)sender {
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
