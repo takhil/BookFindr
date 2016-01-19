@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "tabResTableViewController.h"
+//#import "AFNetworking.h"
 @interface ViewController : UIViewController
-
-
+@property(strong,nonatomic) NSString *searchString;
+@property (strong, nonatomic) NSMutableDictionary *dictSearch;
+@property (strong, nonatomic) NSMutableArray *booksArray;
+@property (strong, nonatomic) NSMutableArray *tempArray;
 @end
 

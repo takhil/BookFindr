@@ -14,14 +14,29 @@
 
 @implementation tabResTableViewController
 
+
+@synthesize selfLinksArray;
+@synthesize selfLinksArrayURL;
+@synthesize titleArray;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSLog(@"SelfLinksArray:%@", selfLinksArray);
+    for (int i=0; i<=[selfLinksArray count]; i++) {
+        NSString *temp = selfLinksArray[i];
+        NSURL *tempURL = [NSURL URLWithString:temp];
     
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
+//        selfLinksArrayURL[i] = tempURL;
+//         NSLog(@"SelfLinksArrayURL:%@", selfLinksArrayURL);
+        NSData *tempData = [NSData dataWithContentsOfURL:tempURL];
+        NSError *error = nil;
+        NSDictionary *tempDict = [NSJSONSerialization JSONObjectWithData:tempData options:0 error:&error];
+        NSDictionary *volumeInfoDict = [tempDict objectForKey:@"volumeInfo"];
+        titleArray[i]=[volumeInfoDict objectForKey:@"title"];
+        
+    }
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    NSLog(@"TitleArray:%@",titleArray);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -44,7 +59,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    
     
     
     return cell;

@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ViewController.h"
 
 @interface tabResTableViewController : UITableViewController
 
-@end
+@property (strong, nonatomic) NSMutableArray *selfLinksArray;
+@property (strong, nonatomic) NSMutableArray *selfLinksArrayURL;
+@property (strong, nonatomic) NSMutableArray *titleArray;
+ @end
