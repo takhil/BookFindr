@@ -9,10 +9,16 @@
 #import "AdvSearchViewController.h"
 
 @interface AdvSearchViewController ()
-
+@property (weak, nonatomic) IBOutlet UITextField *titleTF;
+@property (weak, nonatomic) IBOutlet UITextField *publisherTF;
+@property (weak, nonatomic) IBOutlet UITextField *subjectTF;
+@property (weak, nonatomic) IBOutlet UITextField *isbnTF;
+@property (weak, nonatomic) IBOutlet UITextField *authorTF;
 @end
 
 @implementation AdvSearchViewController
+- (IBAction)advSearchButton:(id)sender {
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

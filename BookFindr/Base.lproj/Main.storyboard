@@ -120,7 +120,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qOA-Mg-OPE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1725" y="-48"/>
+            <point key="canvasLocation" x="1725" y="-138"/>
         </scene>
         <!--Book View Controller-->
         <scene sceneID="GYB-YF-HPB">
@@ -168,7 +168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wiN-OV-J2s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2320" y="-48"/>
+            <point key="canvasLocation" x="2314" y="-138"/>
         </scene>
         <!--Adv Search View Controller-->
         <scene sceneID="tfn-nW-8wM">
@@ -240,6 +240,9 @@
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LzE-lV-0uq">
                                 <rect key="frame" x="141" y="556" width="132" height="30"/>
                                 <state key="normal" title="Perform search"/>
+                                <connections>
+                                    <action selector="advSearchButton:" destination="OZo-6c-ZFe" eventType="touchUpInside" id="vgk-Io-XtF"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="infoLight" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XCN-nV-YiL">
                                 <rect key="frame" x="342" y="491" width="22" height="22"/>
@@ -254,6 +257,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
+                    <connections>
+                        <outlet property="authorTF" destination="crz-vP-JIR" id="N9Z-Zs-cgG"/>
+                        <outlet property="isbnTF" destination="ndm-Lw-l2l" id="Wjo-d3-C4J"/>
+                        <outlet property="publisherTF" destination="gp8-9k-0K9" id="Pas-8Q-uUV"/>
+                        <outlet property="subjectTF" destination="dCO-aP-hv3" id="1nh-Q7-YhP"/>
+                        <outlet property="titleTF" destination="0Nx-Pu-Sv1" id="GsX-fM-5wO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vkg-od-00u" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
