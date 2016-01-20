@@ -7,12 +7,10 @@
 //
 
 #import "bookViewController.h"
+#import "tabResTableViewController.h"
 
 @interface bookViewController ()
-@property (weak, nonatomic) IBOutlet UIImageView *bookImageView;
-@property (weak, nonatomic) IBOutlet UILabel *bookTitle;
-@property (strong, nonatomic) IBOutlet UIView *bookAuthor;
-@property (weak, nonatomic) IBOutlet UITextView *bookDescription;
+
 
 @end
 
@@ -20,6 +18,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //self.bookImageView.image = self.Image;
+    self.bookDescription.text =self.Description;
+    self.bookPublisher.text = self.Publisher;
+    self.bookTitle.text = self.Title;
     // Do any additional setup after loading the view.
 }
 

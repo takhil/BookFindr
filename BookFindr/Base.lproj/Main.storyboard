@@ -171,35 +171,70 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="whI-8N-apE">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="whI-8N-apE">
                                 <rect key="frame" x="87" y="100" width="240" height="240"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Veh-On-TtF">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Veh-On-TtF">
                                 <rect key="frame" x="87" y="364" width="240" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="zgf-OR-xga"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Author" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tug-n4-a0t">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Author" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tug-n4-a0t">
                                 <rect key="frame" x="87" y="384" width="240" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="JdK-Fk-Avu"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" editable="NO" text="Description" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cL-oa-Tpf">
-                                <rect key="frame" x="20" y="413" width="374" height="139"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Publisher" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9IW-jw-O6v">
+                                <rect key="frame" x="87" y="402" width="240" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="ultraLight" pointSize="14"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Description" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4cL-oa-Tpf">
+                                <rect key="frame" x="20" y="431" width="374" height="139"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="139" id="Xx1-f5-eAu"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="whI-8N-apE" firstAttribute="top" secondItem="lhF-QM-AUQ" secondAttribute="bottom" constant="36" id="3ya-cC-SJO"/>
+                            <constraint firstItem="Veh-On-TtF" firstAttribute="top" secondItem="whI-8N-apE" secondAttribute="bottom" constant="24" id="6gs-ez-MKo"/>
+                            <constraint firstItem="4cL-oa-Tpf" firstAttribute="top" secondItem="9IW-jw-O6v" secondAttribute="bottom" constant="8" symbolic="YES" id="NCj-fe-fcQ"/>
+                            <constraint firstItem="tug-n4-a0t" firstAttribute="top" secondItem="whI-8N-apE" secondAttribute="bottom" constant="44" id="VlL-ND-ZaN"/>
+                            <constraint firstItem="9IW-jw-O6v" firstAttribute="top" secondItem="Veh-On-TtF" secondAttribute="bottom" constant="17" id="WWR-RF-DOR"/>
+                            <constraint firstItem="4cL-oa-Tpf" firstAttribute="centerX" secondItem="9IW-jw-O6v" secondAttribute="centerX" id="YaI-ER-KQL"/>
+                            <constraint firstItem="whI-8N-apE" firstAttribute="leading" secondItem="jzS-5Q-GhL" secondAttribute="leadingMargin" constant="67" id="Yjw-Fy-aSt"/>
+                            <constraint firstItem="tug-n4-a0t" firstAttribute="trailing" secondItem="Veh-On-TtF" secondAttribute="trailing" id="acr-9u-Gk1"/>
+                            <constraint firstItem="whI-8N-apE" firstAttribute="trailing" secondItem="Veh-On-TtF" secondAttribute="trailing" id="cgl-w0-zh2"/>
+                            <constraint firstItem="tug-n4-a0t" firstAttribute="leading" secondItem="9IW-jw-O6v" secondAttribute="leading" id="ch9-Lc-Myh"/>
+                            <constraint firstItem="4cL-oa-Tpf" firstAttribute="leading" secondItem="jzS-5Q-GhL" secondAttribute="leadingMargin" id="dhe-S5-THK"/>
+                            <constraint firstItem="tug-n4-a0t" firstAttribute="trailing" secondItem="9IW-jw-O6v" secondAttribute="trailing" id="gH2-hz-NJb"/>
+                            <constraint firstItem="4cL-oa-Tpf" firstAttribute="top" secondItem="tug-n4-a0t" secondAttribute="bottom" constant="26" id="hRJ-Gb-bgS"/>
+                            <constraint firstItem="whI-8N-apE" firstAttribute="leading" secondItem="Veh-On-TtF" secondAttribute="leading" id="sgY-bU-h3f"/>
+                            <constraint firstItem="4cL-oa-Tpf" firstAttribute="trailing" secondItem="jzS-5Q-GhL" secondAttribute="trailingMargin" id="tLH-4d-Rl0"/>
+                            <constraint firstItem="tug-n4-a0t" firstAttribute="leading" secondItem="Veh-On-TtF" secondAttribute="leading" id="wwd-8B-fxT"/>
+                            <constraint firstItem="Fni-x0-ii9" firstAttribute="top" secondItem="4cL-oa-Tpf" secondAttribute="bottom" constant="166" id="x67-SE-W1O"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
                         <outlet property="bookAuthor" destination="jzS-5Q-GhL" id="0WS-iN-rIG"/>
                         <outlet property="bookDescription" destination="4cL-oa-Tpf" id="Fxj-mY-b7W"/>
                         <outlet property="bookImageView" destination="whI-8N-apE" id="Xud-Ko-9dh"/>
+                        <outlet property="bookPublisher" destination="9IW-jw-O6v" id="Q9c-u9-OLi"/>
                         <outlet property="bookTitle" destination="Veh-On-TtF" id="ewG-LN-UxT"/>
                     </connections>
                 </viewController>

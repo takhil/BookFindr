@@ -7,7 +7,7 @@
 //
 
 #import "tabResTableViewController.h"
-
+#import "bookViewController.h"
 @interface tabResTableViewController ()
 
 
@@ -15,6 +15,7 @@
 
 @implementation tabResTableViewController
 
+NSMutableArray *imageTempThumbnail;
 NSMutableArray *imageTemp;
 @synthesize selfLinksArray;
 @synthesize selfLinksArrayURL;
@@ -27,6 +28,13 @@ NSMutableArray *imageTemp;
 @synthesize imageThumbnails;
 @synthesize googleRating;
 @synthesize googleRatingsCount;
+
+//BookViewController properties
+@synthesize bvcAuthor;
+@synthesize bvcDescription;
+@synthesize bvcTitle;
+@synthesize bvcPublisher;
+@synthesize bvcImage;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -44,7 +52,7 @@ NSMutableArray *imageTemp;
     googleRatingsCount = [[NSMutableArray alloc]init];
     
 //Declaring temporary arrays
-   imageTemp =[[NSMutableArray alloc]init];
+   imageTempThumbnail =[[NSMutableArray alloc]init];
     
 //extracting cell parameters
     for (int i=0; i<10; i++) {
@@ -77,6 +85,7 @@ NSMutableArray *imageTemp;
             
             [publisherArray addObject:[volumeInfoDict objectForKey:@"publisher"]];
         }
+#warning Remove HTML Tags
 //Description Extraction
         if ([volumeInfoDict objectForKey:@"description"] !=0) {
             [descriptionArray addObject:[volumeInfoDict objectForKey:@"description"]];
@@ -111,18 +120,28 @@ NSMutableArray *imageTemp;
             [googleRatingsCount addObject:@"N/A"];
         }
        
+#warning Code has to be written if there's no image data available in the api.
         
 //Image thumbnails extraction
         NSMutableDictionary *tempdd = [volumeInfoDict objectForKey:@"imageLinks"];
-        [imageTemp addObject:[tempdd objectForKey:@"smallThumbnail"]] ;
-        NSString *imageString = imageTemp[i];
+        [imageTempThumbnail addObject:[tempdd objectForKey:@"smallThumbnail"]] ;
+        NSString *imageString = imageTempThumbnail[i];
         NSURL *imageURL = [NSURL URLWithString:imageString];
         NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
         UIImage *image = [UIImage imageWithData:imageData];
         [imageThumbnails addObject:image];
+        
+//Images(Big) extraction
+//        [imageTemp addObject:[tempdd objectForKey:@"small"]];
+//        NSString *imageStringSmall = imageTemp[i];
+//        NSURL *imageURLSmall = [NSURL URLWithString:imageStringSmall];
+//        NSData *imageDataSmall = [NSData dataWithContentsOfURL:imageURLSmall];
+//        UIImage *imageSmall = [UIImage imageWithData:imageDataSmall];
+//        [images addObject:imageSmall];
         }
     
-  NSLog(@"UserRating:%@",googleRating);
+    
+  NSLog(@"PublisherArray:%@",publisherArray);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -144,12 +163,16 @@ NSMutableArray *imageTemp;
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    customTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+
+customTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
     cell.bookTitle.text = titleArray[indexPath.row];
     cell.publisherBook.text = publisherArray[indexPath.row];
-    
     cell.bookImage.image = imageThumbnails[indexPath.row];
-    
+    bvcTitle = titleArray[indexPath.row];
+    bvcDescription = descriptionArray[indexPath.row];
+    bvcPublisher = publisherArray[indexPath.row];
+    //bvcImage = images[indexPath.row];
     return cell;
 }
 
@@ -188,14 +211,19 @@ NSMutableArray *imageTemp;
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    bookViewController *bvc = [segue destinationViewController];
+    bvc.Image=bvcImage;
+    bvc.Title=bvcTitle;
+    bvc.Description=bvcDescription;
+    bvc.Publisher=bvcPublisher;
 }
-*/
+
 
 @end
