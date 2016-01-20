@@ -18,4 +18,5 @@
 @property (strong, nonatomic) NSMutableArray *authorsArray;
 @property (strong, nonatomic) NSMutableArray *publisherArray;
 @property (strong, nonatomic) NSMutableArray *descriptionArray;
+@property (strong, nonatomic) NSMutableArray *isbn13;
 @end

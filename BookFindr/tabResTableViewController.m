@@ -22,6 +22,7 @@
 @synthesize authorsArray;
 @synthesize publisherArray;
 @synthesize descriptionArray;
+@synthesize isbn13;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -32,7 +33,7 @@
     authorsArray = [[NSMutableArray alloc]init];
     publisherArray = [[NSMutableArray alloc]init];
     descriptionArray = [[NSMutableArray alloc]init];
-
+    isbn13 = [[NSMutableArray alloc]init];
     
 //extracting cell parameters
     for (int i=0; i<10; i++) {
@@ -47,16 +48,22 @@
           NSLog(@"TempDict:%@",tempDict);
         NSDictionary *volumeInfoDict = [tempDict objectForKey:@"volumeInfo"];
           NSLog(@"Title:%@",[volumeInfoDict objectForKey:@"title"]);
+       
+//Authors extraction
         NSMutableArray *temparr1 = [tempDict objectForKey:@"author"];
+
+        
 //Titles extraction
         [titleArray addObject:[volumeInfoDict objectForKey:@"title"]];
 
 //Publisher extraction
-        if ([volumeInfoDict objectForKey:@"publisher"]!=0) {
-            [publisherArray addObject:[volumeInfoDict objectForKey:@"publisher"]];
+        NSString *check = [volumeInfoDict objectForKey:@"publisher"];
+        if ([check isEqualToString:@""]) {
+            [publisherArray addObject:@"N/A"];
         }
         else {
-            [publisherArray addObject:@"N/A"];
+            
+            [publisherArray addObject:[volumeInfoDict objectForKey:@"publisher"]];
         }
 //Description Extraction
         if ([volumeInfoDict objectForKey:@"description"] !=0) {
@@ -65,9 +72,20 @@
         else {
             [descriptionArray addObject:@"N/A"];
         }
+//ISBN Number extraction
+        NSMutableArray *industrialIdentifiers = [volumeInfoDict objectForKey:@"industryIdentifiers"];
+        NSMutableDictionary *ISBN13 = industrialIdentifiers[1];
+        
+        if ([ISBN13 objectForKey:@"identifier"]!=0) {
+            [isbn13 addObject:[ISBN13 objectForKey:@"identifier"]];
+        }
+        else {
+            [isbn13 addObject:@"N/A"];
+        }
+        
 }
     
-  NSLog(@"PublisherArray:%@",publisherArray);
+  NSLog(@"ISBN ARRAY:%@",isbn13);
 }
 
 - (void)didReceiveMemoryWarning {
