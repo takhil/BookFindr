@@ -19,4 +19,9 @@
 @property (strong, nonatomic) NSMutableArray *publisherArray;
 @property (strong, nonatomic) NSMutableArray *descriptionArray;
 @property (strong, nonatomic) NSMutableArray *isbn13;
+@property (strong, nonatomic) NSMutableArray *imageThumbnails;
+@property (strong, nonatomic) NSMutableArray *images;
+@property (strong, nonatomic) NSMutableArray *googleRating;
+@property (strong, nonatomic) NSMutableArray *googleRatingsCount;
+
 @end

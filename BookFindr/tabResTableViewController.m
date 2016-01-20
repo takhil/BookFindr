@@ -15,7 +15,7 @@
 
 @implementation tabResTableViewController
 
-
+NSMutableArray *imageTemp;
 @synthesize selfLinksArray;
 @synthesize selfLinksArrayURL;
 @synthesize titleArray;
@@ -23,6 +23,10 @@
 @synthesize publisherArray;
 @synthesize descriptionArray;
 @synthesize isbn13;
+@synthesize images;
+@synthesize imageThumbnails;
+@synthesize googleRating;
+@synthesize googleRatingsCount;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,6 +38,13 @@
     publisherArray = [[NSMutableArray alloc]init];
     descriptionArray = [[NSMutableArray alloc]init];
     isbn13 = [[NSMutableArray alloc]init];
+    imageThumbnails =[[NSMutableArray alloc]init];
+    images = [[NSMutableArray alloc]init];
+    googleRating =[[NSMutableArray alloc]init];
+    googleRatingsCount = [[NSMutableArray alloc]init];
+    
+//Declaring temporary arrays
+   imageTemp =[[NSMutableArray alloc]init];
     
 //extracting cell parameters
     for (int i=0; i<10; i++) {
@@ -50,6 +61,7 @@
           NSLog(@"Title:%@",[volumeInfoDict objectForKey:@"title"]);
        
 //Authors extraction
+#warning Author should be extracted in a separate method
         NSMutableArray *temparr1 = [tempDict objectForKey:@"author"];
 
         
@@ -82,10 +94,35 @@
         else {
             [isbn13 addObject:@"N/A"];
         }
+//Google Rating extraction
+        if ([volumeInfoDict objectForKey:@"averageRating"]!=0) {
+            [googleRating addObject:[volumeInfoDict objectForKey:@"averageRating"]];
+        }
+        else {
+            [googleRating addObject:@"N/A"];
+        }
         
-}
+        
+//Google ratings count extraction
+        if ( [volumeInfoDict objectForKey:@"ratingsCount"]!=0) {
+             [googleRatingsCount addObject:[volumeInfoDict objectForKey:@"ratingsCount"]];
+        }
+        else {
+            [googleRatingsCount addObject:@"N/A"];
+        }
+       
+        
+//Image thumbnails extraction
+        NSMutableDictionary *tempdd = [volumeInfoDict objectForKey:@"imageLinks"];
+        [imageTemp addObject:[tempdd objectForKey:@"smallThumbnail"]] ;
+        NSString *imageString = imageTemp[i];
+        NSURL *imageURL = [NSURL URLWithString:imageString];
+        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+        UIImage *image = [UIImage imageWithData:imageData];
+        [imageThumbnails addObject:image];
+        }
     
-  NSLog(@"ISBN ARRAY:%@",isbn13);
+  NSLog(@"UserRating:%@",googleRating);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -110,6 +147,8 @@
     customTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     cell.bookTitle.text = titleArray[indexPath.row];
     cell.publisherBook.text = publisherArray[indexPath.row];
+    
+    cell.bookImage.image = imageThumbnails[indexPath.row];
     
     return cell;
 }
