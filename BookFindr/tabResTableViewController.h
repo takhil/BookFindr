@@ -14,4 +14,5 @@
 @property (strong, nonatomic) NSMutableArray *selfLinksArray;
 @property (strong, nonatomic) NSMutableArray *selfLinksArrayURL;
 @property (strong, nonatomic) NSMutableArray *titleArray;
- @end
+@property (strong, nonatomic) NSMutableArray *authorsArray;
+@end

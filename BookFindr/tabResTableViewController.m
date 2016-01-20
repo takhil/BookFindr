@@ -18,25 +18,31 @@
 @synthesize selfLinksArray;
 @synthesize selfLinksArrayURL;
 @synthesize titleArray;
+@synthesize authorsArray;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    NSMutableArray *tempArray = selfLinksArray[0];
     NSLog(@"SelfLinksArray:%@", selfLinksArray);
-    for (int i=0; i<=[selfLinksArray count]; i++) {
-        NSString *temp = selfLinksArray[i];
-        NSURL *tempURL = [NSURL URLWithString:temp];
-    
-//        selfLinksArrayURL[i] = tempURL;
-//         NSLog(@"SelfLinksArrayURL:%@", selfLinksArrayURL);
+    titleArray = [[NSMutableArray alloc]init];
+    authorsArray = [[NSMutableArray alloc]init];
+    for (int i=0; i<10; i++) {
+       //   NSString *temp = selfLinksArray[i];
+        NSURL *tempURL = [NSURL URLWithString:tempArray[i]];
+    //      NSLog(@"NSURL:%@",tempURL);
+//          selfLinksArrayURL[i] = tempURL;
+//          NSLog(@"SelfLinksArrayURL:%@", selfLinksArrayURL);
         NSData *tempData = [NSData dataWithContentsOfURL:tempURL];
         NSError *error = nil;
         NSDictionary *tempDict = [NSJSONSerialization JSONObjectWithData:tempData options:0 error:&error];
+      //    NSLog(@"TempDict:%@",tempDict);
         NSDictionary *volumeInfoDict = [tempDict objectForKey:@"volumeInfo"];
-        titleArray[i]=[volumeInfoDict objectForKey:@"title"];
-        
-    }
+       //   NSLog(@"Title:%@",[volumeInfoDict objectForKey:@"title"]);
+        NSMutableArray *temparr1 = [tempDict objectForKey:@"author"];
+        [titleArray addObject:[volumeInfoDict objectForKey:@"title"]];
+}
     
-    NSLog(@"TitleArray:%@",titleArray);
+  NSLog(@"TitleArray:%@",titleArray);
 }
 
 - (void)didReceiveMemoryWarning {
