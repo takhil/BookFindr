@@ -16,6 +16,7 @@
 		2602DEA01C4C4228004A4E9C /* AdvSearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602DE9F1C4C4228004A4E9C /* AdvSearchViewController.m */; };
 		2602DEA31C4C43F2004A4E9C /* tabResTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602DEA21C4C43F2004A4E9C /* tabResTableViewController.m */; };
 		2602DEA91C4C596B004A4E9C /* bookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602DEA81C4C596B004A4E9C /* bookViewController.m */; };
+		2602DEF31C4F37DF004A4E9C /* customTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602DEF21C4F37DF004A4E9C /* customTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		2602DEA21C4C43F2004A4E9C /* tabResTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tabResTableViewController.m; sourceTree = "<group>"; };
 		2602DEA71C4C596B004A4E9C /* bookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bookViewController.h; sourceTree = "<group>"; };
 		2602DEA81C4C596B004A4E9C /* bookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bookViewController.m; sourceTree = "<group>"; };
+		2602DEF11C4F37DF004A4E9C /* customTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = customTableViewCell.h; path = ../customTableViewCell.h; sourceTree = "<group>"; };
+		2602DEF21C4F37DF004A4E9C /* customTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = customTableViewCell.m; path = ../customTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +93,8 @@
 			children = (
 				2602DE8D1C4B55A1004A4E9C /* ViewController.h */,
 				2602DE8E1C4B55A1004A4E9C /* ViewController.m */,
+				2602DEF11C4F37DF004A4E9C /* customTableViewCell.h */,
+				2602DEF21C4F37DF004A4E9C /* customTableViewCell.m */,
 				2602DEA11C4C43F2004A4E9C /* tabResTableViewController.h */,
 				2602DEA21C4C43F2004A4E9C /* tabResTableViewController.m */,
 				2602DE9E1C4C4228004A4E9C /* AdvSearchViewController.h */,
@@ -189,6 +194,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2602DEF31C4F37DF004A4E9C /* customTableViewCell.m in Sources */,
 				2602DEA01C4C4228004A4E9C /* AdvSearchViewController.m in Sources */,
 				2602DEA31C4C43F2004A4E9C /* tabResTableViewController.m in Sources */,
 				2602DE8F1C4B55A1004A4E9C /* ViewController.m in Sources */,
