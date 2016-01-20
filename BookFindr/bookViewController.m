@@ -20,6 +20,7 @@
     [super viewDidLoad];
     //self.bookImageView.image = self.Image;
     self.bookDescription.text =self.Description;
+    self.bookDescription.textAlignment = NSTextAlignmentCenter;
     self.bookPublisher.text = self.Publisher;
     self.bookTitle.text = self.Title;
     // Do any additional setup after loading the view.

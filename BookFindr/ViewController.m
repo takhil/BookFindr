@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "MBProgressHUD.h"
 
 
 @interface ViewController ()<UITextFieldDelegate>
@@ -20,6 +21,7 @@
 @synthesize dictSearch;
 @synthesize booksArray;
 - (IBAction)buttonSubmit:(id)sender {
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     NSString *temp = self.searchText.text;
     searchString =[temp stringByReplacingOccurrencesOfString:@" " withString:@"+"];
     NSString *urlString = [[NSString alloc] initWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=%@",searchString];
@@ -34,10 +36,9 @@
     for(NSDictionary* item in booksArray) {
         // NSLog(@"Titles: %@",[item valueForKey:@"selfLink"]);
         _tempArray = [ [NSMutableArray alloc] initWithObjects:[item valueForKey:@"selfLink"], nil];
-       
+        
     }
-    
-    
+
 
 }
 
@@ -45,6 +46,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     [self.searchText becomeFirstResponder];
+   
 }
 
 - (void)didReceiveMemoryWarning {

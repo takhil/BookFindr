@@ -8,6 +8,7 @@
 
 #import "tabResTableViewController.h"
 #import "bookViewController.h"
+#import "NSString_stripHtml.h"
 @interface tabResTableViewController ()
 
 
@@ -85,7 +86,7 @@ NSMutableArray *imageTemp;
             
             [publisherArray addObject:[volumeInfoDict objectForKey:@"publisher"]];
         }
-#warning Remove HTML Tags
+
 //Description Extraction
         if ([volumeInfoDict objectForKey:@"description"] !=0) {
             [descriptionArray addObject:[volumeInfoDict objectForKey:@"description"]];
@@ -140,8 +141,8 @@ NSMutableArray *imageTemp;
 //        [images addObject:imageSmall];
         }
     
-    
-  NSLog(@"PublisherArray:%@",publisherArray);
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+  NSLog(@"Description Array:%@",descriptionArray);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -158,7 +159,7 @@ NSMutableArray *imageTemp;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 //#warning Incomplete implementation, return the number of rows
-    return 10;
+    return titleArray.count;
 }
 
 
@@ -169,13 +170,13 @@ customTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"
     cell.bookTitle.text = titleArray[indexPath.row];
     cell.publisherBook.text = publisherArray[indexPath.row];
     cell.bookImage.image = imageThumbnails[indexPath.row];
-    bvcTitle = titleArray[indexPath.row];
-    bvcDescription = descriptionArray[indexPath.row];
-    bvcPublisher = publisherArray[indexPath.row];
-    //bvcImage = images[indexPath.row];
     return cell;
 }
 
+//-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    [self performSegueWithIdentifier:@"basicSearchSegue" sender:indexPath];
+//}
 
 /*
 // Override to support conditional editing of the table view.
@@ -218,11 +219,13 @@ customTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     bookViewController *bvc = [segue destinationViewController];
-    bvc.Image=bvcImage;
-    bvc.Title=bvcTitle;
-    bvc.Description=bvcDescription;
-    bvc.Publisher=bvcPublisher;
+   // bvc.Image=[imageThumbnails objectAtIndex:indexPath.row] ;
+    bvc.Title=[self.titleArray objectAtIndex:indexPath.row];
+    NSString *descTemp =[self.descriptionArray objectAtIndex:indexPath.row];
+    bvc.Description= [descTemp stripHtml];
+    bvc.Publisher=[publisherArray objectAtIndex:indexPath.row];
 }
 
 
