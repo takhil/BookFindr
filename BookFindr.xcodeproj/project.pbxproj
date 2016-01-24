@@ -19,6 +19,10 @@
 		2602DEF31C4F37DF004A4E9C /* customTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602DEF21C4F37DF004A4E9C /* customTableViewCell.m */; };
 		2602DEF61C4F79A0004A4E9C /* NSString_stripHtml.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602DEF51C4F79A0004A4E9C /* NSString_stripHtml.m */; };
 		2602DEF91C4F7BD3004A4E9C /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602DEF81C4F7BD3004A4E9C /* MBProgressHUD.m */; };
+		2602DEFF1C54971C004A4E9C /* BookFindr.png in Resources */ = {isa = PBXBuildFile; fileRef = 2602DEFE1C54971C004A4E9C /* BookFindr.png */; };
+		2602DF011C549735004A4E9C /* imagena.png in Resources */ = {isa = PBXBuildFile; fileRef = 2602DF001C549735004A4E9C /* imagena.png */; };
+		2602DF031C54973E004A4E9C /* imagena1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2602DF021C54973E004A4E9C /* imagena1.png */; };
+		2602DF061C5499AB004A4E9C /* AppIcon.appiconset in Resources */ = {isa = PBXBuildFile; fileRef = 2602DF051C5499AB004A4E9C /* AppIcon.appiconset */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +48,10 @@
 		2602DEF51C4F79A0004A4E9C /* NSString_stripHtml.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NSString_stripHtml.m; sourceTree = "<group>"; };
 		2602DEF71C4F7BD3004A4E9C /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		2602DEF81C4F7BD3004A4E9C /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		2602DEFE1C54971C004A4E9C /* BookFindr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BookFindr.png; sourceTree = "<group>"; };
+		2602DF001C549735004A4E9C /* imagena.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagena.png; sourceTree = "<group>"; };
+		2602DF021C54973E004A4E9C /* imagena1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagena1.png; sourceTree = "<group>"; };
+		2602DF051C5499AB004A4E9C /* AppIcon.appiconset */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AppIcon.appiconset; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +88,7 @@
 		2602DE861C4B55A1004A4E9C /* BookFindr */ = {
 			isa = PBXGroup;
 			children = (
+				2602DF041C549747004A4E9C /* Image Catalogue */,
 				2602DEA51C4C441B004A4E9C /* Delegates */,
 				2602DEA41C4C4408004A4E9C /* Controllers */,
 				2602DEA61C4C4439004A4E9C /* Views */,
@@ -91,6 +100,7 @@
 		2602DE871C4B55A1004A4E9C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				2602DF051C5499AB004A4E9C /* AppIcon.appiconset */,
 				2602DE931C4B55A1004A4E9C /* Assets.xcassets */,
 				2602DE981C4B55A1004A4E9C /* Info.plist */,
 				2602DE881C4B55A1004A4E9C /* main.m */,
@@ -131,6 +141,16 @@
 				2602DE951C4B55A1004A4E9C /* LaunchScreen.storyboard */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		2602DF041C549747004A4E9C /* Image Catalogue */ = {
+			isa = PBXGroup;
+			children = (
+				2602DEFE1C54971C004A4E9C /* BookFindr.png */,
+				2602DF001C549735004A4E9C /* imagena.png */,
+				2602DF021C54973E004A4E9C /* imagena1.png */,
+			);
+			name = "Image Catalogue";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -191,8 +211,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2602DF031C54973E004A4E9C /* imagena1.png in Resources */,
 				2602DE971C4B55A1004A4E9C /* LaunchScreen.storyboard in Resources */,
 				2602DE941C4B55A1004A4E9C /* Assets.xcassets in Resources */,
+				2602DF011C549735004A4E9C /* imagena.png in Resources */,
+				2602DF061C5499AB004A4E9C /* AppIcon.appiconset in Resources */,
+				2602DEFF1C54971C004A4E9C /* BookFindr.png in Resources */,
 				2602DE921C4B55A1004A4E9C /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

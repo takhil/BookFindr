@@ -18,7 +18,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //self.bookImageView.image = self.Image;
+    self.bookImageView.image = self.Image;
     self.bookDescription.text =self.Description;
     self.bookDescription.textAlignment = NSTextAlignmentCenter;
     self.bookPublisher.text = self.Publisher;

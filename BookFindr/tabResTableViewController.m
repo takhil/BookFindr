@@ -51,9 +51,11 @@ NSMutableArray *imageTemp;
     images = [[NSMutableArray alloc]init];
     googleRating =[[NSMutableArray alloc]init];
     googleRatingsCount = [[NSMutableArray alloc]init];
+   
     
 //Declaring temporary arrays
    imageTempThumbnail =[[NSMutableArray alloc]init];
+    imageTemp = [[NSMutableArray alloc]init];
     
 //extracting cell parameters
     for (int i=0; i<10; i++) {
@@ -121,28 +123,46 @@ NSMutableArray *imageTemp;
             [googleRatingsCount addObject:@"N/A"];
         }
        
-#warning Code has to be written if there's no image data available in the api.
+//#warning Code has to be written if there's no image data available in the api.
         
 //Image thumbnails extraction
         NSMutableDictionary *tempdd = [volumeInfoDict objectForKey:@"imageLinks"];
-        [imageTempThumbnail addObject:[tempdd objectForKey:@"smallThumbnail"]] ;
-        NSString *imageString = imageTempThumbnail[i];
-        NSURL *imageURL = [NSURL URLWithString:imageString];
-        NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-        UIImage *image = [UIImage imageWithData:imageData];
-        [imageThumbnails addObject:image];
+       
+        if ([tempdd objectForKey:@"smallThumbnail"]!=0) {
+            [imageTempThumbnail addObject:[tempdd objectForKey:@"smallThumbnail"]] ;
+            NSString *imageString = imageTempThumbnail[i];
+            NSURL *imageURL = [NSURL URLWithString:imageString];
+            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+            UIImage *image = [UIImage imageWithData:imageData];
+            [imageThumbnails addObject:image];
+        }
+        else {
+            
+            UIImage *imagena = [UIImage imageNamed:@"imagena.png"];
+            [imageThumbnails addObject:imagena];
+            
+        }
+            
+        
         
 //Images(Big) extraction
-//        [imageTemp addObject:[tempdd objectForKey:@"small"]];
-//        NSString *imageStringSmall = imageTemp[i];
-//        NSURL *imageURLSmall = [NSURL URLWithString:imageStringSmall];
-//        NSData *imageDataSmall = [NSData dataWithContentsOfURL:imageURLSmall];
-//        UIImage *imageSmall = [UIImage imageWithData:imageDataSmall];
-//        [images addObject:imageSmall];
+
+        if ([tempdd objectForKey: @"thumbnail"]!=0) {
+            [imageTemp addObject:[tempdd objectForKey:@"thumbnail"]];
+            NSString *imageStringSmall = imageTemp[i];
+            NSURL *imageURLSmall = [NSURL URLWithString:imageStringSmall];
+            NSData *imageDataSmall = [NSData dataWithContentsOfURL:imageURLSmall];
+            UIImage *imageSmall = [UIImage imageWithData:imageDataSmall];
+            [images addObject:imageSmall];
+            }
+        else {
+            UIImage *imagena1 = [UIImage imageNamed:@"imagena1.png"];
+            [images addObject:imagena1];
+            }
         }
     
     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-  NSLog(@"Description Array:%@",descriptionArray);
+  NSLog(@"images Array:%@",images);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -221,7 +241,7 @@ customTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"
     // Pass the selected object to the new view controller.
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     bookViewController *bvc = [segue destinationViewController];
-   // bvc.Image=[imageThumbnails objectAtIndex:indexPath.row] ;
+    bvc.Image=[images objectAtIndex:indexPath.row] ;
     bvc.Title=[self.titleArray objectAtIndex:indexPath.row];
     NSString *descTemp =[self.descriptionArray objectAtIndex:indexPath.row];
     bvc.Description= [descTemp stripHtml];
