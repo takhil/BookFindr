@@ -21,9 +21,14 @@
     self.bookImageView.image = self.Image;
     self.bookDescription.text =self.Description;
     self.bookDescription.textAlignment = NSTextAlignmentCenter;
-    self.bookPublisher.text = self.Publisher;
+    NSString *publisher = [[NSString alloc]initWithFormat:@"Publisher: "];
+    publisher = [publisher stringByAppendingString:self.Publisher];
+    self.bookPublisher.text = publisher;
     self.bookTitle.text = self.Title;
-    self.bookAuthor.text = self.Author;
+    
+    NSString *authors = [[NSString alloc]initWithFormat:@"Authors: "];
+    authors = [authors stringByAppendingString:self.Author];
+    self.bookAuthor.text = authors;
     // Do any additional setup after loading the view.
 }
 

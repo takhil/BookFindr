@@ -101,15 +101,16 @@ NSMutableArray *imageTemp;
             [titleArray addObject:@"N/A"];
         }
 //Publisher extraction
-#warning  add string append @"Publisher: "
+
        
-        if ([volumeInfoDict objectForKey:@"publisher"]==0) {
-            
-            [publisherArray addObject:@"N/A"];
-        }
-        else {
+        if ([volumeInfoDict objectForKey:@"publisher"]!=0) {
             
             [publisherArray addObject:[volumeInfoDict objectForKey:@"publisher"]];
+            
+        }
+        
+        else {
+            [publisherArray addObject:@"N/A"];
         }
 
 //Description Extraction
@@ -156,15 +157,14 @@ NSMutableArray *imageTemp;
         else {
             [googleRatingsCount addObject:@"N/A"];
         }
-       
-#warning Code has to be re-written if there's no image data available in the api. Not working for example "Lavde ke ball"
         
 //Image thumbnails extraction
         if ([volumeInfoDict objectForKey:@"imageLinks"]!=0) {
            tempdd = [volumeInfoDict objectForKey:@"imageLinks"];
             
             if ([tempdd objectForKey:@"smallThumbnail"]!=0) {
-               NSString *imageString = [[NSString alloc]initWithFormat:[tempdd objectForKey:@"smallThumbnail"]];
+                NSString *imageString = [[NSString alloc]init ];
+                imageString = [tempdd objectForKey:@"smallThumbnail"];
                 NSURL *imageURL = [NSURL URLWithString:imageString];
                 NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
                 UIImage *image = [UIImage imageWithData:imageData];
@@ -197,7 +197,7 @@ NSMutableArray *imageTemp;
         }
     
  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-  NSLog(@"Images array:%@",imageThumbnails);
+  NSLog(@"Publisher Array:%@",publisherArray);
 }
 
 - (void)didReceiveMemoryWarning {
