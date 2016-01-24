@@ -23,6 +23,7 @@
     self.bookDescription.textAlignment = NSTextAlignmentCenter;
     self.bookPublisher.text = self.Publisher;
     self.bookTitle.text = self.Title;
+    self.bookAuthor.text = self.Author;
     // Do any additional setup after loading the view.
 }
 

@@ -11,7 +11,8 @@
 @interface bookViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *bookImageView;
 @property (weak, nonatomic) IBOutlet UILabel *bookTitle;
-@property (strong, nonatomic) IBOutlet UIView *bookAuthor;
+
+@property (weak, nonatomic) IBOutlet UILabel *bookAuthor;
 @property (weak, nonatomic) IBOutlet UITextView *bookDescription;
 @property (weak, nonatomic) IBOutlet UILabel *bookPublisher;
 

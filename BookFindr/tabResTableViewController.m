@@ -29,19 +29,16 @@ NSMutableArray *imageTemp;
 @synthesize imageThumbnails;
 @synthesize googleRating;
 @synthesize googleRatingsCount;
+@synthesize authorsString;
+@synthesize ISBN13;
 
-//BookViewController properties
-@synthesize bvcAuthor;
-@synthesize bvcDescription;
-@synthesize bvcTitle;
-@synthesize bvcPublisher;
-@synthesize bvcImage;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
    
 //Declaring arrays
     NSMutableArray *tempArray = selfLinksArray[0];
+    NSMutableDictionary *tempdd = [[NSMutableDictionary alloc]init];
     titleArray = [[NSMutableArray alloc]init];
     authorsArray = [[NSMutableArray alloc]init];
     publisherArray = [[NSMutableArray alloc]init];
@@ -51,8 +48,12 @@ NSMutableArray *imageTemp;
     images = [[NSMutableArray alloc]init];
     googleRating =[[NSMutableArray alloc]init];
     googleRatingsCount = [[NSMutableArray alloc]init];
-   
-    
+    authorsString = [[NSString alloc]init];
+    ISBN13 = [[NSMutableDictionary alloc]init];
+    UIImage *imagena = [UIImage imageNamed:@"imagena.png"];
+    NSLog(@"Imagena :%@",imagena);
+    UIImage *imagena1 = [UIImage imageNamed:@"imagena1.png"];
+    NSLog(@"Imagena1 :%@",imagena1);
 //Declaring temporary arrays
    imageTempThumbnail =[[NSMutableArray alloc]init];
     imageTemp = [[NSMutableArray alloc]init];
@@ -72,16 +73,36 @@ NSMutableArray *imageTemp;
           NSLog(@"Title:%@",[volumeInfoDict objectForKey:@"title"]);
        
 //Authors extraction
-#warning Author should be extracted in a separate method
-        NSMutableArray *temparr1 = [tempDict objectForKey:@"author"];
-
+#warning Authors should be formatted
+        if ([volumeInfoDict objectForKey:@"authors"]!=0) {
+            NSMutableArray *temparr1 = [volumeInfoDict objectForKey:@"authors"];
+            for (int j=0 ; j<temparr1.count; j++) {
+                authorsString = [authorsString stringByAppendingString: temparr1[j]];
+                if (temparr1.count>=2) {
+                    authorsString = [authorsString stringByAppendingString:@","];
+                }
+            }
+            [authorsArray addObject:authorsString];
+            authorsString = @"";
+        }
+        else {
+            authorsString = @"N/A";
+            [authorsArray addObject:authorsString];
+        }
         
 //Titles extraction
-        [titleArray addObject:[volumeInfoDict objectForKey:@"title"]];
+        if ([volumeInfoDict objectForKey:@"title"]!=0) {
+            [titleArray addObject:[volumeInfoDict objectForKey:@"title"]];
 
+        }
+        else {
+            [titleArray addObject:@"N/A"];
+        }
 //Publisher extraction
-        NSString *check = [volumeInfoDict objectForKey:@"publisher"];
-        if ([check isEqualToString:@""]) {
+#warning  add string append @"Publisher: "
+       
+        if ([volumeInfoDict objectForKey:@"publisher"]==0) {
+            
             [publisherArray addObject:@"N/A"];
         }
         else {
@@ -97,15 +118,26 @@ NSMutableArray *imageTemp;
             [descriptionArray addObject:@"N/A"];
         }
 //ISBN Number extraction
-        NSMutableArray *industrialIdentifiers = [volumeInfoDict objectForKey:@"industryIdentifiers"];
-        NSMutableDictionary *ISBN13 = industrialIdentifiers[1];
-        
-        if ([ISBN13 objectForKey:@"identifier"]!=0) {
-            [isbn13 addObject:[ISBN13 objectForKey:@"identifier"]];
+        if ([volumeInfoDict objectForKey:@"industryIdentifiers"]!=0) {
+            NSMutableArray *industrialIdentifiers = [volumeInfoDict objectForKey:@"industryIdentifiers"];
+            
+            if (industrialIdentifiers[1]!=0) {
+                ISBN13 = industrialIdentifiers[1];
+                
+                if ([ISBN13 objectForKey:@"identifier"]!=0) {
+                    [isbn13 addObject:[ISBN13 objectForKey:@"identifier"]];
+                }
+                else {
+                    [isbn13 addObject:@"N/A"];
+                }
+            }
         }
         else {
             [isbn13 addObject:@"N/A"];
         }
+        
+       
+        
 //Google Rating extraction
         if ([volumeInfoDict objectForKey:@"averageRating"]!=0) {
             [googleRating addObject:[volumeInfoDict objectForKey:@"averageRating"]];
@@ -123,46 +155,47 @@ NSMutableArray *imageTemp;
             [googleRatingsCount addObject:@"N/A"];
         }
        
-//#warning Code has to be written if there's no image data available in the api.
+#warning Code has to be re-written if there's no image data available in the api. Not working for example "Lavde ke ball"
         
 //Image thumbnails extraction
-        NSMutableDictionary *tempdd = [volumeInfoDict objectForKey:@"imageLinks"];
-       
-        if ([tempdd objectForKey:@"smallThumbnail"]!=0) {
-            [imageTempThumbnail addObject:[tempdd objectForKey:@"smallThumbnail"]] ;
-            NSString *imageString = imageTempThumbnail[i];
-            NSURL *imageURL = [NSURL URLWithString:imageString];
-            NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-            UIImage *image = [UIImage imageWithData:imageData];
-            [imageThumbnails addObject:image];
-        }
-        else {
+        if ([volumeInfoDict objectForKey:@"imageLinks"]!=0) {
+           tempdd = [volumeInfoDict objectForKey:@"imageLinks"];
             
-            UIImage *imagena = [UIImage imageNamed:@"imagena.png"];
+            if ([tempdd objectForKey:@"smallThumbnail"]!=0) {
+               NSString *imageString = [[NSString alloc]initWithFormat:[tempdd objectForKey:@"smallThumbnail"]];
+                NSURL *imageURL = [NSURL URLWithString:imageString];
+                NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+                UIImage *image = [UIImage imageWithData:imageData];
+                [imageThumbnails addObject:image];
+            }
+            else {
+                [imageThumbnails addObject:imagena];
+            }
+        }
+        else{
             [imageThumbnails addObject:imagena];
-            
         }
+       
             
         
-        
+
 //Images(Big) extraction
 
-        if ([tempdd objectForKey: @"thumbnail"]!=0) {
-            [imageTemp addObject:[tempdd objectForKey:@"thumbnail"]];
-            NSString *imageStringSmall = imageTemp[i];
-            NSURL *imageURLSmall = [NSURL URLWithString:imageStringSmall];
-            NSData *imageDataSmall = [NSData dataWithContentsOfURL:imageURLSmall];
-            UIImage *imageSmall = [UIImage imageWithData:imageDataSmall];
-            [images addObject:imageSmall];
-            }
-        else {
-            UIImage *imagena1 = [UIImage imageNamed:@"imagena1.png"];
-            [images addObject:imagena1];
-            }
+//        if ([tempdd objectForKey: @"thumbnail"]!=0) {
+//            [imageTemp addObject:[tempdd objectForKey:@"thumbnail"]];
+//            NSString *imageStringSmall = imageTemp[i];
+//            NSURL *imageURLSmall = [NSURL URLWithString:imageStringSmall];
+//            NSData *imageDataSmall = [NSData dataWithContentsOfURL:imageURLSmall];
+//            UIImage *imageSmall = [UIImage imageWithData:imageDataSmall];
+//            [images addObject:imageSmall];
+//            }
+//        else {
+//            [images addObject:imagena1];
+//            }
         }
     
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-  NSLog(@"images Array:%@",images);
+ [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+  NSLog(@"Images array:%@",imageThumbnails);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -189,7 +222,9 @@ customTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"
     
     cell.bookTitle.text = titleArray[indexPath.row];
     cell.publisherBook.text = publisherArray[indexPath.row];
+    
     cell.bookImage.image = imageThumbnails[indexPath.row];
+    cell.bookAuthors.text = authorsArray[indexPath.row];
     return cell;
 }
 
@@ -241,11 +276,12 @@ customTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"
     // Pass the selected object to the new view controller.
     NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
     bookViewController *bvc = [segue destinationViewController];
-    bvc.Image=[images objectAtIndex:indexPath.row] ;
+    bvc.Image=[imageThumbnails objectAtIndex:indexPath.row] ;
     bvc.Title=[self.titleArray objectAtIndex:indexPath.row];
     NSString *descTemp =[self.descriptionArray objectAtIndex:indexPath.row];
     bvc.Description= [descTemp stripHtml];
     bvc.Publisher=[publisherArray objectAtIndex:indexPath.row];
+    bvc.Author = [authorsArray objectAtIndex:indexPath.row];
 }
 
 

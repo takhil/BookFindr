@@ -23,12 +23,8 @@
 @property (strong, nonatomic) NSMutableArray *images;
 @property (strong, nonatomic) NSMutableArray *googleRating;
 @property (strong, nonatomic) NSMutableArray *googleRatingsCount;
+@property (strong, nonatomic) NSString *authorsString;
+@property (strong, nonatomic) NSMutableDictionary *ISBN13;
 
-//BookViewController Properties
-@property (strong, nonatomic) NSString * bvcTitle;
-@property (strong, nonatomic) NSString *bvcAuthor;
-@property (strong, nonatomic) NSString *bvcDescription;
-@property (strong, nonatomic) NSString *bvcPublisher;
-@property (strong, nonatomic) UIImage *bvcImage;
 
 @end
