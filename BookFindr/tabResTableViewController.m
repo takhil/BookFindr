@@ -50,27 +50,29 @@ NSMutableArray *imageTemp;
     googleRatingsCount = [[NSMutableArray alloc]init];
     authorsString = [[NSString alloc]init];
     ISBN13 = [[NSMutableDictionary alloc]init];
+    
+ //Default images
     UIImage *imagena = [UIImage imageNamed:@"imagena.png"];
     NSLog(@"Imagena :%@",imagena);
     UIImage *imagena1 = [UIImage imageNamed:@"imagena1.png"];
     NSLog(@"Imagena1 :%@",imagena1);
+    
+    
+    
 //Declaring temporary arrays
    imageTempThumbnail =[[NSMutableArray alloc]init];
     imageTemp = [[NSMutableArray alloc]init];
     
 //extracting cell parameters
-    for (int i=0; i<10; i++) {
-//          NSString *temp = selfLinksArray[i];
+    for (int i=0; i<tempArray.count; i++) {
+
         NSURL *tempURL = [NSURL URLWithString:tempArray[i]];
-      NSLog(@"NSURL:%@",tempURL);
-//          selfLinksArrayURL[i] = tempURL;
-//          NSLog(@"SelfLinksArrayURL:%@", selfLinksArrayURL);
         NSData *tempData = [NSData dataWithContentsOfURL:tempURL];
         NSError *error = nil;
         NSDictionary *tempDict = [NSJSONSerialization JSONObjectWithData:tempData options:0 error:&error];
-          NSLog(@"TempDict:%@",tempDict);
+         // NSLog(@"TempDict:%@",tempDict);
         NSDictionary *volumeInfoDict = [tempDict objectForKey:@"volumeInfo"];
-          NSLog(@"Title:%@",[volumeInfoDict objectForKey:@"title"]);
+         // NSLog(@"Title:%@",[volumeInfoDict objectForKey:@"title"]);
        
 //Authors extraction
 #warning Authors should be formatted

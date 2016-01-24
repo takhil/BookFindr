@@ -13,5 +13,6 @@
 @property (strong, nonatomic) UIAlertController *info;
 @property (strong, nonatomic) NSString *searchStringavc;
 @property (strong, nonatomic) NSString *urlStringavc;
+@property (weak, nonatomic) IBOutlet UIButton *advSubmit;
 
 @end

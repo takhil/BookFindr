@@ -23,7 +23,12 @@
 
 - (IBAction)advSearchButton:(id)sender {
     
-   if (self.publisherTF.text!=0) {
+   
+    
+}
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    self.advSubmit.enabled = YES;
+    if (self.publisherTF.text!=0) {
         NSString *temp = self.publisherTF.text;
         searchStringavc = [temp stringByReplacingOccurrencesOfString:@" " withString:@"+"];
         urlStringavc = [NSString stringWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=inpublisher:%@&key=AIzaSyCg-cr3wsxUWjgZNSEzAsQHVqB3eZ97QFQ",searchStringavc];
@@ -51,9 +56,8 @@
         UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
         [info addAction:ok];
     }
-    
+    return YES;
 }
-
 
 - (IBAction)infoButton:(id)sender {
 #warning info button not working
@@ -67,6 +71,7 @@
     // Do any additional setup after loading the view.
     searchStringavc = [[NSString alloc]init];
     urlStringavc = [[NSString alloc]init];
+    self.advSubmit.enabled = NO;
 }
 
 - (void)didReceiveMemoryWarning {

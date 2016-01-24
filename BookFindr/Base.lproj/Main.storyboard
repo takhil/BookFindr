@@ -45,13 +45,14 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LiC-ns-9cg">
-                                <rect key="frame" x="87" y="441" width="240" height="21"/>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LiC-ns-9cg">
+                                <rect key="frame" x="20" y="441" width="374" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="MJg-0W-9aF"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Advanced Search"/>
+                                <state key="disabled" title="Advanced Search - ComingSoon!"/>
                                 <connections>
                                     <segue destination="OZo-6c-ZFe" kind="show" id="JbH-c9-Vgj"/>
                                 </connections>
@@ -67,11 +68,11 @@
                             <constraint firstItem="LiC-ns-9cg" firstAttribute="top" secondItem="Hk4-fc-rnK" secondAttribute="bottom" constant="8" symbolic="YES" id="7yx-vu-9ta"/>
                             <constraint firstItem="hGW-Ln-0hm" firstAttribute="top" secondItem="jZM-YZ-IXK" secondAttribute="bottom" constant="19" id="J3N-fD-THh"/>
                             <constraint firstItem="jZM-YZ-IXK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="51" id="YO6-Gf-7ej"/>
-                            <constraint firstItem="hGW-Ln-0hm" firstAttribute="leading" secondItem="LiC-ns-9cg" secondAttribute="leading" id="bJG-Cv-Bko"/>
+                            <constraint firstItem="hGW-Ln-0hm" firstAttribute="leading" secondItem="LiC-ns-9cg" secondAttribute="leading" constant="67" id="bJG-Cv-Bko"/>
                             <constraint firstItem="Hk4-fc-rnK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="34" id="cwW-Mx-1ye"/>
                             <constraint firstItem="Hk4-fc-rnK" firstAttribute="top" secondItem="hGW-Ln-0hm" secondAttribute="bottom" constant="8" symbolic="YES" id="hix-GG-1y5"/>
                             <constraint firstAttribute="trailingMargin" secondItem="i6Y-G1-xE2" secondAttribute="trailing" constant="34" id="hvM-fd-LuV"/>
-                            <constraint firstItem="LiC-ns-9cg" firstAttribute="trailing" secondItem="hGW-Ln-0hm" secondAttribute="trailing" id="iks-Lc-vve"/>
+                            <constraint firstItem="LiC-ns-9cg" firstAttribute="trailing" secondItem="hGW-Ln-0hm" secondAttribute="trailing" constant="67" id="iks-Lc-vve"/>
                             <constraint firstItem="jZM-YZ-IXK" firstAttribute="trailing" secondItem="hGW-Ln-0hm" secondAttribute="trailing" id="kKT-Ho-40U"/>
                             <constraint firstItem="jZM-YZ-IXK" firstAttribute="leading" secondItem="hGW-Ln-0hm" secondAttribute="leading" id="pfg-Jk-G02"/>
                             <constraint firstItem="LiC-ns-9cg" firstAttribute="top" secondItem="i6Y-G1-xE2" secondAttribute="bottom" constant="8" symbolic="YES" id="uqZ-vp-zAR"/>
@@ -553,6 +554,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina55"/>
                     <connections>
+                        <outlet property="advSubmit" destination="LzE-lV-0uq" id="idP-td-oS5"/>
                         <outlet property="authorTF" destination="crz-vP-JIR" id="N9Z-Zs-cgG"/>
                         <outlet property="isbnTF" destination="ndm-Lw-l2l" id="Wjo-d3-C4J"/>
                         <outlet property="publisherTF" destination="gp8-9k-0K9" id="Pas-8Q-uUV"/>
@@ -588,7 +590,7 @@
         <image name="BookFindr.png" width="2179" height="2288"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="whV-hh-4E4"/>
+        <segue reference="rlc-Tv-JaF"/>
         <segue reference="pXB-Mm-hoU"/>
     </inferredMetricsTieBreakers>
 </document>
