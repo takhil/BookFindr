@@ -70,9 +70,9 @@ NSMutableArray *imageTemp;
         NSData *tempData = [NSData dataWithContentsOfURL:tempURL];
         NSError *error = nil;
         NSDictionary *tempDict = [NSJSONSerialization JSONObjectWithData:tempData options:0 error:&error];
-         // NSLog(@"TempDict:%@",tempDict);
+         NSLog(@"TempDict:%@",tempDict);
         NSDictionary *volumeInfoDict = [tempDict objectForKey:@"volumeInfo"];
-         // NSLog(@"Title:%@",[volumeInfoDict objectForKey:@"title"]);
+          NSLog(@"Title:%@",[volumeInfoDict objectForKey:@"title"]);
        
 //Authors extraction
 #warning Authors should be formatted
@@ -80,8 +80,9 @@ NSMutableArray *imageTemp;
             NSMutableArray *temparr1 = [volumeInfoDict objectForKey:@"authors"];
             for (int j=0 ; j<temparr1.count; j++) {
                 authorsString = [authorsString stringByAppendingString: temparr1[j]];
+             
                 if (temparr1.count>=2) {
-                    authorsString = [authorsString stringByAppendingString:@","];
+                    authorsString = [authorsString stringByAppendingString:@", "];
                 }
             }
             [authorsArray addObject:authorsString];
@@ -197,7 +198,7 @@ NSMutableArray *imageTemp;
         }
     
  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-  NSLog(@"Publisher Array:%@",publisherArray);
+  NSLog(@"Author Array:%@",authorsArray);
 }
 
 - (void)didReceiveMemoryWarning {

@@ -26,37 +26,69 @@
    
     
 }
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
-    self.advSubmit.enabled = YES;
-    if (self.publisherTF.text!=0) {
-        NSString *temp = self.publisherTF.text;
-        searchStringavc = [temp stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        urlStringavc = [NSString stringWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=inpublisher:%@&key=AIzaSyCg-cr3wsxUWjgZNSEzAsQHVqB3eZ97QFQ",searchStringavc];
+
+
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string; {
+  
+    if (textField.editing) {
+        self.advSubmit.enabled = YES;
+                if (self.publisherTF.text!=0) {
+                    NSString *temp = self.publisherTF.text;
+                    searchStringavc = [temp stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+                    urlStringavc = [NSString stringWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=inpublisher:%@&key=AIzaSyCg-cr3wsxUWjgZNSEzAsQHVqB3eZ97QFQ",searchStringavc];
+                    self.subjectTF.enabled = NO;
+                    self.isbnTF.enabled = NO;
+                    self.authorTF.enabled = NO;
+                    self.publisherTF.enabled=YES;
+                    self.titleTF.enabled=NO;
+                }
+            
+                else if (self.subjectTF.text!=0) {
+                    NSString *temp = self.subjectTF.text;
+                    searchStringavc = [temp stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+                    urlStringavc = [NSString stringWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=subject:%@&key=AIzaSyCg-cr3wsxUWjgZNSEzAsQHVqB3eZ97QFQ",searchStringavc];
+                    self.subjectTF.enabled = YES;
+                    self.isbnTF.enabled = NO;
+                    self.authorTF.enabled = NO;
+                    self.publisherTF.enabled=NO;
+                    self.titleTF.enabled=NO;
+                }
+            
+                else if (self.isbnTF.text!=0) {
+                    NSString *temp = self.isbnTF.text;
+                    searchStringavc = [temp stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+                    urlStringavc = [NSString stringWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=isbn:%@&key=AIzaSyCg-cr3wsxUWjgZNSEzAsQHVqB3eZ97QFQ",searchStringavc];
+                    self.subjectTF.enabled = NO;
+                    self.isbnTF.enabled = YES;
+                    self.authorTF.enabled = NO;
+                    self.publisherTF.enabled=NO;
+                    self.titleTF.enabled=NO;
+                }
+                else if (self.authorTF.text!=0) {
+                    NSString *temp = self.authorTF.text;
+                    searchStringavc = [temp stringByReplacingOccurrencesOfString:@" " withString:@"+"];
+                    urlStringavc = [NSString stringWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=inauthor:%@&key=AIzaSyCg-cr3wsxUWjgZNSEzAsQHVqB3eZ97QFQ",searchStringavc];
+                    self.subjectTF.enabled = NO;
+                    self.isbnTF.enabled = NO;
+                    self.authorTF.enabled = YES;
+                    self.publisherTF.enabled=NO;
+                    self.titleTF.enabled=NO;
+                }
+            
+                else {
+                    info = [UIAlertController alertControllerWithTitle:@"Instructions" message:@"Please enter your query" preferredStyle:UIAlertControllerStyleAlert];
+                    UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
+                    [info addAction:ok];
+                }
     }
-    
-    else if (self.subjectTF.text!=0) {
-        NSString *temp = self.subjectTF.text;
-        searchStringavc = [temp stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        urlStringavc = [NSString stringWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=subject:%@&key=AIzaSyCg-cr3wsxUWjgZNSEzAsQHVqB3eZ97QFQ",searchStringavc];
-    }
-    
-    else if (self.isbnTF.text!=0) {
-        NSString *temp = self.isbnTF.text;
-        searchStringavc = [temp stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        urlStringavc = [NSString stringWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=isbn:%@&key=AIzaSyCg-cr3wsxUWjgZNSEzAsQHVqB3eZ97QFQ",searchStringavc];
-    }
-    else if (self.authorTF.text!=0) {
-        NSString *temp = self.authorTF.text;
-        searchStringavc = [temp stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        urlStringavc = [NSString stringWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=inauthor:%@&key=AIzaSyCg-cr3wsxUWjgZNSEzAsQHVqB3eZ97QFQ",searchStringavc];
-    }
-    
     else {
-        info = [UIAlertController alertControllerWithTitle:@"Instructions" message:@"Please enter your query" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *ok = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:nil];
-        [info addAction:ok];
+        self.advSubmit.enabled=NO;
     }
+    
+    
     return YES;
+
 }
 
 - (IBAction)infoButton:(id)sender {
@@ -84,6 +116,7 @@
     [self.subjectTF resignFirstResponder];
     [self.isbnTF resignFirstResponder];
     [self.authorTF resignFirstResponder];
+    
 
 }
 /*
