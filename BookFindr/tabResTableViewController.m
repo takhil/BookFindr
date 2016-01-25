@@ -60,7 +60,7 @@ NSMutableArray *imageTemp;
     
     
 //Declaring temporary arrays
-   imageTempThumbnail =[[NSMutableArray alloc]init];
+    imageTempThumbnail =[[NSMutableArray alloc]init];
     imageTemp = [[NSMutableArray alloc]init];
     
 //extracting cell parameters
