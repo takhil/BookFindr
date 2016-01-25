@@ -75,22 +75,16 @@ NSMutableArray *imageTemp;
           NSLog(@"Title:%@",[volumeInfoDict objectForKey:@"title"]);
        
 //Authors extraction
-#warning Authors should be formatted
         if ([volumeInfoDict objectForKey:@"authors"]!=0) {
             NSMutableArray *temparr1 = [volumeInfoDict objectForKey:@"authors"];
-            for (int j=0 ; j<temparr1.count; j++) {
-                authorsString = [authorsString stringByAppendingString: temparr1[j]];
-             
-                if (temparr1.count>=2) {
-                    authorsString = [authorsString stringByAppendingString:@", "];
-                }
-            }
+            authorsString = [temparr1 componentsJoinedByString:@", "];
             [authorsArray addObject:authorsString];
             authorsString = @"";
         }
         else {
             authorsString = @"N/A";
             [authorsArray addObject:authorsString];
+            authorsString = @"";
         }
         
 //Titles extraction
@@ -224,10 +218,16 @@ NSMutableArray *imageTemp;
 customTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     
     cell.bookTitle.text = titleArray[indexPath.row];
-    cell.publisherBook.text = publisherArray[indexPath.row];
+    
+    NSString *cellPubText = [[NSString alloc]initWithFormat:@"Publisher: "];
+    cellPubText = [cellPubText stringByAppendingString:publisherArray[indexPath.row]];
+    cell.publisherBook.text = cellPubText;
     
     cell.bookImage.image = imageThumbnails[indexPath.row];
-    cell.bookAuthors.text = authorsArray[indexPath.row];
+    
+    NSString *cellAuthText = [[NSString alloc]initWithFormat:@"Authors: "];
+    cellAuthText = [cellAuthText stringByAppendingString: authorsArray[indexPath.row]];
+    cell.bookAuthors.text = cellAuthText;
     return cell;
 }
 

@@ -22,6 +22,9 @@
 		2602DEFF1C54971C004A4E9C /* BookFindr.png in Resources */ = {isa = PBXBuildFile; fileRef = 2602DEFE1C54971C004A4E9C /* BookFindr.png */; };
 		2602DF011C549735004A4E9C /* imagena.png in Resources */ = {isa = PBXBuildFile; fileRef = 2602DF001C549735004A4E9C /* imagena.png */; };
 		2602DF031C54973E004A4E9C /* imagena1.png in Resources */ = {isa = PBXBuildFile; fileRef = 2602DF021C54973E004A4E9C /* imagena1.png */; };
+		2602DF0A1C55F63C004A4E9C /* a-smile_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 2602DF091C55F63C004A4E9C /* a-smile_color.png */; };
+		2602DF0C1C55F648004A4E9C /* Apple_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2602DF0B1C55F648004A4E9C /* Apple_logo.png */; };
+		2602DF0F1C55F876004A4E9C /* Google_Play_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2602DF0E1C55F876004A4E9C /* Google_Play_logo.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,9 @@
 		2602DEFE1C54971C004A4E9C /* BookFindr.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BookFindr.png; sourceTree = "<group>"; };
 		2602DF001C549735004A4E9C /* imagena.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagena.png; sourceTree = "<group>"; };
 		2602DF021C54973E004A4E9C /* imagena1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = imagena1.png; sourceTree = "<group>"; };
+		2602DF091C55F63C004A4E9C /* a-smile_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "a-smile_color.png"; sourceTree = "<group>"; };
+		2602DF0B1C55F648004A4E9C /* Apple_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Apple_logo.png; sourceTree = "<group>"; };
+		2602DF0E1C55F876004A4E9C /* Google_Play_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Google_Play_logo.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,8 +152,19 @@
 				2602DEFE1C54971C004A4E9C /* BookFindr.png */,
 				2602DF001C549735004A4E9C /* imagena.png */,
 				2602DF021C54973E004A4E9C /* imagena1.png */,
+				2602DF0D1C55F65E004A4E9C /* Logos */,
 			);
 			name = "Image Catalogue";
+			sourceTree = "<group>";
+		};
+		2602DF0D1C55F65E004A4E9C /* Logos */ = {
+			isa = PBXGroup;
+			children = (
+				2602DF0B1C55F648004A4E9C /* Apple_logo.png */,
+				2602DF0E1C55F876004A4E9C /* Google_Play_logo.png */,
+				2602DF091C55F63C004A4E9C /* a-smile_color.png */,
+			);
+			name = Logos;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -210,10 +227,13 @@
 			files = (
 				2602DF031C54973E004A4E9C /* imagena1.png in Resources */,
 				2602DE971C4B55A1004A4E9C /* LaunchScreen.storyboard in Resources */,
+				2602DF0A1C55F63C004A4E9C /* a-smile_color.png in Resources */,
 				2602DE941C4B55A1004A4E9C /* Assets.xcassets in Resources */,
 				2602DF011C549735004A4E9C /* imagena.png in Resources */,
 				2602DEFF1C54971C004A4E9C /* BookFindr.png in Resources */,
+				2602DF0C1C55F648004A4E9C /* Apple_logo.png in Resources */,
 				2602DE921C4B55A1004A4E9C /* Main.storyboard in Resources */,
+				2602DF0F1C55F876004A4E9C /* Google_Play_logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
