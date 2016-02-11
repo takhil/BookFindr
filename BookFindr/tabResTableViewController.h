@@ -13,7 +13,7 @@
 @interface tabResTableViewController : UITableViewController
 
 @property (strong, nonatomic) NSMutableArray *selfLinksArray;
-@property (strong, nonatomic) NSMutableArray *selfLinksArrayURL;
+
 @property (strong, nonatomic) NSMutableArray *titleArray;
 @property (strong, nonatomic) NSMutableArray *authorsArray;
 @property (strong, nonatomic) NSMutableArray *publisherArray;
@@ -25,6 +25,11 @@
 @property (strong, nonatomic) NSMutableArray *googleRatingsCount;
 @property (strong, nonatomic) NSString *authorsString;
 @property (strong, nonatomic) NSMutableDictionary *ISBN13;
+@property (strong, nonatomic) NSMutableDictionary *saleInfoDict;
 
 
+//Prices properties
+@property (strong, nonatomic) NSMutableArray *googleListPrices;
+@property (strong, nonatomic) NSMutableArray *googleRetailPrices;
+@property (strong, nonatomic) NSMutableArray *applePrices;
 @end

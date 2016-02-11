@@ -44,7 +44,7 @@
                     self.titleTF.enabled=NO;
                 }
             
-                else if (self.subjectTF.text!=0) {
+                if (self.subjectTF.text!=0) {
                     NSString *temp = self.subjectTF.text;
                     searchStringavc = [temp stringByReplacingOccurrencesOfString:@" " withString:@"+"];
                     urlStringavc = [NSString stringWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=subject:%@&key=AIzaSyCg-cr3wsxUWjgZNSEzAsQHVqB3eZ97QFQ",searchStringavc];
@@ -55,7 +55,7 @@
                     self.titleTF.enabled=NO;
                 }
             
-                else if (self.isbnTF.text!=0) {
+                if (self.isbnTF.text!=0) {
                     NSString *temp = self.isbnTF.text;
                     searchStringavc = [temp stringByReplacingOccurrencesOfString:@" " withString:@"+"];
                     urlStringavc = [NSString stringWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=isbn:%@&key=AIzaSyCg-cr3wsxUWjgZNSEzAsQHVqB3eZ97QFQ",searchStringavc];
@@ -65,7 +65,8 @@
                     self.publisherTF.enabled=NO;
                     self.titleTF.enabled=NO;
                 }
-                else if (self.authorTF.text!=0) {
+        
+                if (self.authorTF.text!=0) {
                     NSString *temp = self.authorTF.text;
                     searchStringavc = [temp stringByReplacingOccurrencesOfString:@" " withString:@"+"];
                     urlStringavc = [NSString stringWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=inauthor:%@&key=AIzaSyCg-cr3wsxUWjgZNSEzAsQHVqB3eZ97QFQ",searchStringavc];

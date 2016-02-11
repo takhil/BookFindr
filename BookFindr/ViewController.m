@@ -26,7 +26,7 @@
     if (self.searchText.text.length!=0) {
         NSString *temp = self.searchText.text;
         searchString =[temp stringByReplacingOccurrencesOfString:@" " withString:@"+"];
-        NSString *urlString = [[NSString alloc] initWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=%@",searchString];
+        NSString *urlString = [[NSString alloc] initWithFormat:@"https://www.googleapis.com/books/v1/volumes?q=%@&key=AIzaSyCg-cr3wsxUWjgZNSEzAsQHVqB3eZ97QFQ",searchString];
         NSLog(@"UrlString:%@",urlString);
         NSURL *basicURL = [NSURL URLWithString:urlString];
         NSData *basicData = [NSData dataWithContentsOfURL:basicURL];

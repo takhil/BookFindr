@@ -19,7 +19,6 @@
 NSMutableArray *imageTempThumbnail;
 NSMutableArray *imageTemp;
 @synthesize selfLinksArray;
-@synthesize selfLinksArrayURL;
 @synthesize titleArray;
 @synthesize authorsArray;
 @synthesize publisherArray;
@@ -31,7 +30,9 @@ NSMutableArray *imageTemp;
 @synthesize googleRatingsCount;
 @synthesize authorsString;
 @synthesize ISBN13;
-
+@synthesize saleInfoDict;
+@synthesize googleListPrices;
+@synthesize googleRetailPrices;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -50,14 +51,13 @@ NSMutableArray *imageTemp;
     googleRatingsCount = [[NSMutableArray alloc]init];
     authorsString = [[NSString alloc]init];
     ISBN13 = [[NSMutableDictionary alloc]init];
+    saleInfoDict = [[NSMutableDictionary alloc]init];
+    googleListPrices = [[NSMutableArray alloc]init];
+    googleRetailPrices = [[NSMutableArray alloc]init];
     
  //Default images
     UIImage *imagena = [UIImage imageNamed:@"imagena.png"];
-    NSLog(@"Imagena :%@",imagena);
     UIImage *imagena1 = [UIImage imageNamed:@"imagena1.png"];
-    NSLog(@"Imagena1 :%@",imagena1);
-    
-    
     
 //Declaring temporary arrays
     imageTempThumbnail =[[NSMutableArray alloc]init];
@@ -69,10 +69,11 @@ NSMutableArray *imageTemp;
         NSURL *tempURL = [NSURL URLWithString:tempArray[i]];
         NSData *tempData = [NSData dataWithContentsOfURL:tempURL];
         NSError *error = nil;
-        NSDictionary *tempDict = [NSJSONSerialization JSONObjectWithData:tempData options:0 error:&error];
-         NSLog(@"TempDict:%@",tempDict);
-        NSDictionary *volumeInfoDict = [tempDict objectForKey:@"volumeInfo"];
-          NSLog(@"Title:%@",[volumeInfoDict objectForKey:@"title"]);
+        NSMutableDictionary *tempDict = [NSJSONSerialization JSONObjectWithData:tempData options:0 error:&error];
+       //   NSLog(@"TempDict:%@",tempDict);
+        NSMutableDictionary *volumeInfoDict = [tempDict objectForKey:@"volumeInfo"];
+        saleInfoDict = [tempDict objectForKey:@"saleInfo"];
+        //  NSLog(@"Title:%@",[volumeInfoDict objectForKey:@"title"]);
        
 //Authors extraction
         if ([volumeInfoDict objectForKey:@"authors"]!=0) {
@@ -96,8 +97,6 @@ NSMutableArray *imageTemp;
             [titleArray addObject:@"N/A"];
         }
 //Publisher extraction
-
-       
         if ([volumeInfoDict objectForKey:@"publisher"]!=0) {
             
             [publisherArray addObject:[volumeInfoDict objectForKey:@"publisher"]];
@@ -152,6 +151,38 @@ NSMutableArray *imageTemp;
         else {
             [googleRatingsCount addObject:@"N/A"];
         }
+      
+        
+// Prices Extraction
+        //Google
+        
+        if ([saleInfoDict objectForKey:@"listPrice"]!=0) {
+            NSMutableDictionary *listPriceDict = [saleInfoDict objectForKey:@"listPrice"];
+            if ([listPriceDict objectForKey:@"amount"]!=0) {
+                [googleListPrices addObject:[listPriceDict objectForKey:@"amount"]];
+            }
+            else{
+                [googleListPrices addObject:@"N/A"];
+            }
+        }
+        else {
+            [googleListPrices addObject:@"N/A"];
+        }
+       
+        if ([saleInfoDict objectForKey:@"retailPrice"]!=0) {
+            NSMutableDictionary *retailPriceDict = [saleInfoDict objectForKey:@"retailPrice"];
+            if ([retailPriceDict objectForKey:@"amount"]!=0) {
+                [googleRetailPrices addObject:[retailPriceDict objectForKey:@"amount"]];
+            }
+            else{
+                [googleRetailPrices addObject:@"N/A"];
+            }
+        }
+        else{
+            [googleRetailPrices addObject:@"N/A"];
+        }
+        
+        
         
 //Image thumbnails extraction
         if ([volumeInfoDict objectForKey:@"imageLinks"]!=0) {
@@ -189,10 +220,11 @@ NSMutableArray *imageTemp;
 //        else {
 //            [images addObject:imagena1];
 //            }
+        
         }
     
  [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-  NSLog(@"Author Array:%@",authorsArray);
+ // NSLog(@"Author Array:%@",googleRetailPrices);
 }
 
 - (void)didReceiveMemoryWarning {
