@@ -26,10 +26,6 @@
 		2602DF0C1C55F648004A4E9C /* Apple_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2602DF0B1C55F648004A4E9C /* Apple_logo.png */; };
 		2602DF0F1C55F876004A4E9C /* Google_Play_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 2602DF0E1C55F876004A4E9C /* Google_Play_logo.png */; };
 		2602DF121C6D9FB4004A4E9C /* AmazonAuthUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602DF111C6D9FB4004A4E9C /* AmazonAuthUtils.m */; };
-		2602DF151C6DA146004A4E9C /* PicoXMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602DF141C6DA146004A4E9C /* PicoXMLElement.m */; };
-		2602DF181C6DA6BC004A4E9C /* AWSECommerceServiceClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602DF171C6DA6BC004A4E9C /* AWSECommerceServiceClient.m */; };
-		2602DF1B1C6DA823004A4E9C /* AWSECommerceServicePortType_SOAPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2602DF1A1C6DA823004A4E9C /* AWSECommerceServicePortType_SOAPClient.m */; };
-		2602DF1D1C6DA873004A4E9C /* awsecommerceservice in Resources */ = {isa = PBXBuildFile; fileRef = 2602DF1C1C6DA873004A4E9C /* awsecommerceservice */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,13 +59,6 @@
 		2602DF0E1C55F876004A4E9C /* Google_Play_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Google_Play_logo.png; sourceTree = "<group>"; };
 		2602DF101C6D9FB4004A4E9C /* AmazonAuthUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonAuthUtils.h; sourceTree = "<group>"; };
 		2602DF111C6D9FB4004A4E9C /* AmazonAuthUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonAuthUtils.m; sourceTree = "<group>"; };
-		2602DF131C6DA146004A4E9C /* PicoXMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PicoXMLElement.h; sourceTree = "<group>"; };
-		2602DF141C6DA146004A4E9C /* PicoXMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PicoXMLElement.m; sourceTree = "<group>"; };
-		2602DF161C6DA6BC004A4E9C /* AWSECommerceServiceClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AWSECommerceServiceClient.h; sourceTree = "<group>"; };
-		2602DF171C6DA6BC004A4E9C /* AWSECommerceServiceClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWSECommerceServiceClient.m; sourceTree = "<group>"; };
-		2602DF191C6DA814004A4E9C /* AWSECommerceServicePortType_SOAPClient.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AWSECommerceServicePortType_SOAPClient.h; sourceTree = "<group>"; };
-		2602DF1A1C6DA823004A4E9C /* AWSECommerceServicePortType_SOAPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AWSECommerceServicePortType_SOAPClient.m; sourceTree = "<group>"; };
-		2602DF1C1C6DA873004A4E9C /* awsecommerceservice */ = {isa = PBXFileReference; lastKnownFileType = folder; path = awsecommerceservice; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,13 +81,6 @@
 				2602DEF81C4F7BD3004A4E9C /* MBProgressHUD.m */,
 				2602DF101C6D9FB4004A4E9C /* AmazonAuthUtils.h */,
 				2602DF111C6D9FB4004A4E9C /* AmazonAuthUtils.m */,
-				2602DF131C6DA146004A4E9C /* PicoXMLElement.h */,
-				2602DF141C6DA146004A4E9C /* PicoXMLElement.m */,
-				2602DF161C6DA6BC004A4E9C /* AWSECommerceServiceClient.h */,
-				2602DF171C6DA6BC004A4E9C /* AWSECommerceServiceClient.m */,
-				2602DF191C6DA814004A4E9C /* AWSECommerceServicePortType_SOAPClient.h */,
-				2602DF1A1C6DA823004A4E9C /* AWSECommerceServicePortType_SOAPClient.m */,
-				2602DF1C1C6DA873004A4E9C /* awsecommerceservice */,
 				2602DE861C4B55A1004A4E9C /* BookFindr */,
 				2602DE851C4B55A1004A4E9C /* Products */,
 			);
@@ -257,7 +239,6 @@
 				2602DF0C1C55F648004A4E9C /* Apple_logo.png in Resources */,
 				2602DE921C4B55A1004A4E9C /* Main.storyboard in Resources */,
 				2602DF0F1C55F876004A4E9C /* Google_Play_logo.png in Resources */,
-				2602DF1D1C6DA873004A4E9C /* awsecommerceservice in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,12 +254,9 @@
 				2602DEA31C4C43F2004A4E9C /* tabResTableViewController.m in Sources */,
 				2602DE8F1C4B55A1004A4E9C /* ViewController.m in Sources */,
 				2602DEF91C4F7BD3004A4E9C /* MBProgressHUD.m in Sources */,
-				2602DF1B1C6DA823004A4E9C /* AWSECommerceServicePortType_SOAPClient.m in Sources */,
-				2602DF151C6DA146004A4E9C /* PicoXMLElement.m in Sources */,
 				2602DEA91C4C596B004A4E9C /* bookViewController.m in Sources */,
 				2602DEF61C4F79A0004A4E9C /* NSString_stripHtml.m in Sources */,
 				2602DE8C1C4B55A1004A4E9C /* AppDelegate.m in Sources */,
-				2602DF181C6DA6BC004A4E9C /* AWSECommerceServiceClient.m in Sources */,
 				2602DE891C4B55A1004A4E9C /* main.m in Sources */,
 				2602DF121C6D9FB4004A4E9C /* AmazonAuthUtils.m in Sources */,
 			);

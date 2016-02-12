@@ -10,8 +10,7 @@
 #import "bookViewController.h"
 #import "NSString_stripHtml.h"
 #import "AmazonAuthUtils.h"
-#import "PicoXMLElement.h"
-#import "AWSECommerceServiceClient.h"
+
 
 @interface tabResTableViewController ()
 
@@ -266,84 +265,7 @@ NSMutableArray *imageTemp;
         // build signature
         NSString *signatureInput = timestamp;
         NSString *signature = [AmazonAuthUtils sha256HMac:[signatureInput dataUsingEncoding:NSUTF8StringEncoding] withKey:@"AKIAJ2FPO6ZEYWE5R4TQ"];
-        
-        // add SOAP headers
-        NSMutableArray *customSoapHeaders = [[NSMutableArray alloc]init];
-        PicoXMLElement *accessKeyElement = [[PicoXMLElement alloc] init] ;
-        accessKeyElement.nsUri = AuthHeaderNS;
-        accessKeyElement.name = @"AWSAccessKeyId";
-        accessKeyElement.value = AWSAccessKeyId;
-      [customSoapHeaders addObject:accessKeyElement];
-        PicoXMLElement *timestampElement = [[PicoXMLElement alloc] init] ;
-        timestampElement.nsUri = AuthHeaderNS;
-        timestampElement.name = @"Timestamp";
-        timestampElement.value = timestamp;
-       [customSoapHeaders addObject:timestampElement];
-        PicoXMLElement *signatureElement = [[PicoXMLElement alloc] init] ;
-        signatureElement.nsUri = AuthHeaderNS;
-        signatureElement.name = @"Signature";
-        signatureElement.value = signature;
-      [customSoapHeaders addObject:signatureElement];
-      
-        // get shared client
-        AWSECommerceServiceClient *client = [AWSECommerceServiceClient sharedClient];
-        client.debug = YES;
-        
-        // build request, see details here:
-        ItemSearch *request = [[[ItemSearch alloc] init] autorelease];
-        request.associateTag = @"tag"; // seems any tag is ok
-        request.shared = [[[ItemSearchRequest alloc] init] autorelease];
-        request.shared.searchIndex = @"Books";
-        request.shared.responseGroup = [NSMutableArray arrayWithObjects:@"Images", @"Small", nil];
-        ItemSearchRequest *itemSearchRequest = [[[ItemSearchRequest alloc] init] autorelease];
-        itemSearchRequest.title = _searchText.text;
-        request.request = [NSMutableArray arrayWithObject:itemSearchRequest];
-        
-        // authenticate the request
-        // http://docs.aws.amazon.com/AWSECommerceService/latest/DG/NotUsingWSSecurity.html
-        [client authenticateRequest:@"ItemSearch"];
-        [client itemSearch:request success:^(ItemSearchResponse *responseObject) {
-            // stop progress activity
-            [self.view hideToastActivity];
             
-            // success handling logic
-            if (responseObject.items.count > 0) {
-                Items *items = [responseObject.items objectAtIndex:0];
-                if (items.item.count > 0) {
-                    Item *item = [items.item objectAtIndex:0];
-                    
-                    // start image downloading progress activity
-                    [self.view makeToastActivity];
-                    // get gallery image
-                    NSURL *imageURL = [NSURL URLWithString:item.smallImage.url];
-                    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
-                    // stop progress activity
-                    [self.view hideToastActivity];
-                    
-                    UIImage *image = [UIImage imageWithData:imageData];
-                    [self.view makeToast:item.itemAttributes.title duration:3.0 position:@"center" title:@"Success" image:image];
-                } else {
-                    // no result
-                    [self.view makeToast:@"No result" duration:3.0 position:@"center"];
-                }
-                
-            } else {
-                // no result
-                [self.view makeToast:@"No result" duration:3.0 position:@"center"];
-            }
-        } failure:^(NSError *error, id<PicoBindable> soapFault) {
-            // stop progress activity
-            [self.view hideToastActivity];
-            
-            // error handling logic
-            if (error) { // http or parsing error
-                [self.view makeToast:[error localizedDescription] duration:3.0 position:@"center" title:@"Error"];
-            } else if (soapFault) {
-                SOAP11Fault *soap11Fault = (SOAP11Fault *)soapFault;
-                [self.view makeToast:soap11Fault.faultstring duration:3.0 position:@"center" title:@"SOAP Fault"];
-            }
-        }];
-        
         
         
     
