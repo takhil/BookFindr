@@ -12,8 +12,8 @@
 
 @interface tabResTableViewController : UITableViewController
 
+//Google Books API Properties
 @property (strong, nonatomic) NSMutableArray *selfLinksArray;
-
 @property (strong, nonatomic) NSMutableArray *titleArray;
 @property (strong, nonatomic) NSMutableArray *authorsArray;
 @property (strong, nonatomic) NSMutableArray *publisherArray;
@@ -28,8 +28,15 @@
 @property (strong, nonatomic) NSMutableDictionary *saleInfoDict;
 
 
-//Prices properties
+//Google Boooks Prices properties
 @property (strong, nonatomic) NSMutableArray *googleListPrices;
 @property (strong, nonatomic) NSMutableArray *googleRetailPrices;
+
+
+//Apple Properties
+@property (strong, nonatomic) NSString *UrlStringApple;
+@property (strong, nonatomic) NSURL *UrlApple;
+@property (strong, nonatomic) NSData *AppleData;
+@property (strong, nonatomic) NSMutableDictionary *AppleDict;
 @property (strong, nonatomic) NSMutableArray *applePrices;
 @end

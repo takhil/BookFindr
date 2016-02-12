@@ -9,6 +9,10 @@
 #import "tabResTableViewController.h"
 #import "bookViewController.h"
 #import "NSString_stripHtml.h"
+#import "AmazonAuthUtils.h"
+#import "PicoXMLElement.h"
+#import "AWSECommerceServiceClient.h"
+
 @interface tabResTableViewController ()
 
 
@@ -16,6 +20,8 @@
 
 @implementation tabResTableViewController
 
+
+//Google Books API Properties
 NSMutableArray *imageTempThumbnail;
 NSMutableArray *imageTemp;
 @synthesize selfLinksArray;
@@ -31,8 +37,17 @@ NSMutableArray *imageTemp;
 @synthesize authorsString;
 @synthesize ISBN13;
 @synthesize saleInfoDict;
+
+//Google Books Properties
 @synthesize googleListPrices;
 @synthesize googleRetailPrices;
+
+//Apple Properties
+@synthesize UrlApple;
+@synthesize UrlStringApple;
+@synthesize AppleData;
+@synthesize AppleDict;
+@synthesize applePrices;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,14 +69,24 @@ NSMutableArray *imageTemp;
     saleInfoDict = [[NSMutableDictionary alloc]init];
     googleListPrices = [[NSMutableArray alloc]init];
     googleRetailPrices = [[NSMutableArray alloc]init];
+    applePrices = [[NSMutableArray alloc]init];
     
  //Default images
     UIImage *imagena = [UIImage imageNamed:@"imagena.png"];
-    UIImage *imagena1 = [UIImage imageNamed:@"imagena1.png"];
+  //  UIImage *imagena1 = [UIImage imageNamed:@"imagena1.png"];
     
 //Declaring temporary arrays
     imageTempThumbnail =[[NSMutableArray alloc]init];
     imageTemp = [[NSMutableArray alloc]init];
+    
+//Amazon Parameters
+    static NSString *const AWSECServiceURLString = @"https://webservices.amazon.com/onca/soap?Service=AWSECommerceService";
+    
+    NSString *const AWSAccessKeyId = @"AKIAJ2FPO6ZEYWE5R4TQ";
+    NSString *const AWSSecureKeyId = @"";
+    
+    static NSString *const AuthHeaderNS = @"http://security.amazonaws.com/doc/2007-01-01/";
+
     
 //extracting cell parameters
     for (int i=0; i<tempArray.count; i++) {
@@ -204,10 +229,128 @@ NSMutableArray *imageTemp;
             [imageThumbnails addObject:imagena];
         }
        
-            
+//Apple Prices and URL extraction
+        NSLog(@"isbn13:%@",isbn13);
+        if ( [isbn13[i] isEqualToString:@"N/A"]){
+        }
+        else {
+            UrlStringApple = [[NSString alloc]initWithFormat:@"https://itunes.apple.com/lookup?isbn=%@",isbn13[i]];
+            UrlApple =[NSURL URLWithString:UrlStringApple] ;
+            AppleData = [NSData dataWithContentsOfURL:UrlApple];
+            AppleDict = [NSJSONSerialization JSONObjectWithData:AppleData options:0 error:nil];
+            NSDictionary *resultsDict = [[NSDictionary alloc]init];
+            NSMutableArray *resultsArray = [AppleDict objectForKey:@"results"];
+            if ([resultsArray count]!=0) {
+                resultsDict = resultsArray[0];
+                if ([resultsDict objectForKey:@"formattedPrice"]!=0) {
+                    [applePrices addObject:[resultsDict objectForKey:@"formattedPrice"]];
+                }
+                else {
+                    [applePrices addObject:@"N/A"];
+                }
+                
+            }
+            else {
+                [applePrices addObject:@"N/A"];
+            }
+            }
         
-
-//Images(Big) extraction
+//Amazon Prices and URL extraction
+        
+        // build timestamp
+        NSDateFormatter *dataFormatter = [[NSDateFormatter alloc] init] ;
+        [dataFormatter setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss'Z'"];
+        [dataFormatter setTimeZone:[NSTimeZone timeZoneWithName:@"US/Eastern"]];
+        NSString *timestamp = [dataFormatter stringFromDate:[NSDate date]];
+        
+        // build signature
+        NSString *signatureInput = timestamp;
+        NSString *signature = [AmazonAuthUtils sha256HMac:[signatureInput dataUsingEncoding:NSUTF8StringEncoding] withKey:@"AKIAJ2FPO6ZEYWE5R4TQ"];
+        
+        // add SOAP headers
+        NSMutableArray *customSoapHeaders = [[NSMutableArray alloc]init];
+        PicoXMLElement *accessKeyElement = [[PicoXMLElement alloc] init] ;
+        accessKeyElement.nsUri = AuthHeaderNS;
+        accessKeyElement.name = @"AWSAccessKeyId";
+        accessKeyElement.value = AWSAccessKeyId;
+      [customSoapHeaders addObject:accessKeyElement];
+        PicoXMLElement *timestampElement = [[PicoXMLElement alloc] init] ;
+        timestampElement.nsUri = AuthHeaderNS;
+        timestampElement.name = @"Timestamp";
+        timestampElement.value = timestamp;
+       [customSoapHeaders addObject:timestampElement];
+        PicoXMLElement *signatureElement = [[PicoXMLElement alloc] init] ;
+        signatureElement.nsUri = AuthHeaderNS;
+        signatureElement.name = @"Signature";
+        signatureElement.value = signature;
+      [customSoapHeaders addObject:signatureElement];
+      
+        // get shared client
+        AWSECommerceServiceClient *client = [AWSECommerceServiceClient sharedClient];
+        client.debug = YES;
+        
+        // build request, see details here:
+        ItemSearch *request = [[[ItemSearch alloc] init] autorelease];
+        request.associateTag = @"tag"; // seems any tag is ok
+        request.shared = [[[ItemSearchRequest alloc] init] autorelease];
+        request.shared.searchIndex = @"Books";
+        request.shared.responseGroup = [NSMutableArray arrayWithObjects:@"Images", @"Small", nil];
+        ItemSearchRequest *itemSearchRequest = [[[ItemSearchRequest alloc] init] autorelease];
+        itemSearchRequest.title = _searchText.text;
+        request.request = [NSMutableArray arrayWithObject:itemSearchRequest];
+        
+        // authenticate the request
+        // http://docs.aws.amazon.com/AWSECommerceService/latest/DG/NotUsingWSSecurity.html
+        [client authenticateRequest:@"ItemSearch"];
+        [client itemSearch:request success:^(ItemSearchResponse *responseObject) {
+            // stop progress activity
+            [self.view hideToastActivity];
+            
+            // success handling logic
+            if (responseObject.items.count > 0) {
+                Items *items = [responseObject.items objectAtIndex:0];
+                if (items.item.count > 0) {
+                    Item *item = [items.item objectAtIndex:0];
+                    
+                    // start image downloading progress activity
+                    [self.view makeToastActivity];
+                    // get gallery image
+                    NSURL *imageURL = [NSURL URLWithString:item.smallImage.url];
+                    NSData *imageData = [NSData dataWithContentsOfURL:imageURL];
+                    // stop progress activity
+                    [self.view hideToastActivity];
+                    
+                    UIImage *image = [UIImage imageWithData:imageData];
+                    [self.view makeToast:item.itemAttributes.title duration:3.0 position:@"center" title:@"Success" image:image];
+                } else {
+                    // no result
+                    [self.view makeToast:@"No result" duration:3.0 position:@"center"];
+                }
+                
+            } else {
+                // no result
+                [self.view makeToast:@"No result" duration:3.0 position:@"center"];
+            }
+        } failure:^(NSError *error, id<PicoBindable> soapFault) {
+            // stop progress activity
+            [self.view hideToastActivity];
+            
+            // error handling logic
+            if (error) { // http or parsing error
+                [self.view makeToast:[error localizedDescription] duration:3.0 position:@"center" title:@"Error"];
+            } else if (soapFault) {
+                SOAP11Fault *soap11Fault = (SOAP11Fault *)soapFault;
+                [self.view makeToast:soap11Fault.faultstring duration:3.0 position:@"center" title:@"SOAP Fault"];
+            }
+        }];
+        
+        
+        
+    
+        NSLog(@"ApplePrices:%@",applePrices);
+        NSLog(@"GooglePrices:%@", googleRetailPrices);
+    
+//Images(Big) extraction(Not Required)
 
 //        if ([tempdd objectForKey: @"thumbnail"]!=0) {
 //            [imageTemp addObject:[tempdd objectForKey:@"thumbnail"]];
